@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Classes by Yulia Masliak</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+class Builder{
+    constructor(int, from, to){
+        if (!this.int){
+            int = 0;
+        }
+        this.int = int;
+        this.from = from;
+        this.to = to;}
+plus(...n) {
+    n.forEach(item=>this.int+=item);
+    return this.int;}
+minus(...n) {
+    n.forEach(item=>this.int-=item);
+    return this.int;}
+multiply(n){
+    return this.int = this.int*n;}
+divide(n){
+    return this.int = this.int/n;}
+
+mod(n){
+    return this.int = this.int%n;
+}
+get(){
+    return this.int;
+}
+random(from, to) {
+     return Math.trunc(Math.random() * (to - from) + from);
+}
+}
+
+class integerBuilder extends Builder {
+constructor(int, from, to){
+    super(int, from, to);
+}
+}
+
+let intBuilder = new integerBuilder();
+console.log(intBuilder
+  .plus(2, 3, 2))
+  console.log(intBuilder.minus(1, 2))
+  console.log(intBuilder.multiply(2))
+  console.log(intBuilder.divide(4))
+  console.log(intBuilder.mod(3))
+  console.log(intBuilder.get());
+  console.log(intBuilder.random(10, 100));
+
+</script>
+</html>
