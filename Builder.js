@@ -1,31 +1,37 @@
 class Builder{
-    constructor(int){
-        if (!int){
-            int = 0;
-        }
-        this.int = int;
-
-    }
+constructor(arg){
+   this.arg = arg;
+}
 plus(...n) {
-    n.forEach(item=>this.int+=item);
-    return this.int;}
+    n.forEach(item=>this.arg+=item);
+    return this.arg;}
 
-minus(...n) {  //What is the right way here:
-  // - set a common condition in base class so that it works properly for both extended classes or ...
-  // - leave here only one condition and set a separate function in one of the extended class, for examle with the string arguments? or ...
-  // - do not set this function in base class, but set two separate functions to each extended class?
-    if (typeof this.int === "number") {
-      n.forEach((item) => (this.int -= item));
-    } else if (typeof this.int === "string") {
+minus(...n) {
+    if (typeof this.arg === "number") {
+      n.forEach((item) => (this.arg -= item));
+    } else if (typeof this.arg === "string") {
       n.forEach(
-        (item) => (this.int = this.int.substring(0, this.int.length - item))
+        (item) => (this.arg = this.arg.substring(0, this.arg.length - item))
       );}
-    return this.int}
+    return this.arg}
+
+multiply(n) {
+      if(typeof this.arg ==="number"){
+        this.arg = this.arg * n;
+
+    } else if (typeof this.arg==="string"){
+       this.arg = this.arg.repeat(n);
+       }
+       return this.arg}
+
+divide(n){
+  if(typeof this.arg === "number"){
+      this.arg = this.arg/n;}
+  else if(typeof this.arg === "string"){
+    this.arg = this.arg.slice(0, Math.floor(this.arg.length/n));
+  }return this.arg}
 
 get(){
-    return this.int;
-}
-random(from, to) {
-    return  Math.trunc(Math.random() * (to - from) + from);
+    return this.arg;
 }
 }

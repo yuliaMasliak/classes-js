@@ -1,16 +1,13 @@
 class IntegerBuilder extends Builder {
-    constructor(int){
-        super(int);
-    }
-    multiply(n) {
-        this.int = this.int * n;
-        return this.int;
-      }
-    divide(n){
-        return this.int = this.int/n;
+    constructor(arg = 0){
+        super(arg);
     }
     mod(n){
-        return this.int = this.int%n;
+        this.arg = this.arg % n;
+        return this.arg;
+    }
+    random(from, to) {
+        return  Math.trunc(Math.random() * (to - from) + from);
     }
     }
 

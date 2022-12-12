@@ -3,31 +3,19 @@ function extend(Parent, Child){
     Child.prototype = Object.create(Parent.prototype);
     Child.prototype.constructor = Parent;
   }
-  function StringBuilder(int){
-  if (!int){
-    int = "";
-  }
-  this.int = int;
-      }
   extend(Builder, StringBuilder);
 
-  console.log(Builder.isPrototypeOf(StringBuilder)); //false ??
-  console.log(StringBuilder.prototype.constructor === Builder.prototype.constructor); //but true here??
-
-  StringBuilder.prototype.multiply = function(int) {
-    return this.int = this.int.repeat(int);
-  };
-  StringBuilder.prototype.divide = function(n){
-      return this.int = this.int.slice(0, Math.floor(this.int.length/n));
+  function StringBuilder(arg=""){
+  this.arg = arg;
   }
+
   StringBuilder.prototype.remove = function (str) {
-     return this.int = this.int.split(str).join("");
+    return this.arg = this.arg.split(str).join("");
   };
 
   StringBuilder.prototype.sub = function (from, n) {
-    return this.int = this.int.substring(from, from+n);
+    return this.arg = this.arg.substring(from, from+n);
   }
-
 
   let strBuilder = new StringBuilder('Hello');
 
@@ -38,3 +26,6 @@ function extend(Parent, Child){
   console.log(strBuilder.remove('l')); // 'He';
   console.log(strBuilder.sub(1,1))     // 'e';
   console.log(strBuilder.get());   // 'e';
+
+  console.log(Builder.isPrototypeOf(StringBuilder)); //Why it is false ??
+  console.log(StringBuilder.prototype.constructor === Builder.prototype.constructor); //but true here??
