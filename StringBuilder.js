@@ -1,31 +1,48 @@
 //StringBuilder class (ES5) extended from Bulder base class
-function extend(Parent, Child){
-    Child.prototype = Object.create(Parent.prototype);
-    Child.prototype.constructor = Parent;
-  }
-  extend(Builder, StringBuilder);
+function extend(Parent, Child) {
+  Child.prototype = Object.create(Parent.prototype);
+  Child.prototype.constructor = Parent;
+}
+extend(Builder, StringBuilder);
 
-  function StringBuilder(arg=""){
+function StringBuilder(arg = "") {
   this.arg = arg;
-  }
+}
+StringBuilder.prototype.minus = function (...n) {
+  n.forEach(
+    (item) => (this.arg = this.arg.substring(0, this.arg.length - item))
+  );
+  return this;
+};
 
-  StringBuilder.prototype.remove = function (str) {
-    return this.arg = this.arg.split(str).join("");
-  };
+StringBuilder.prototype.multiply = function (n) {
+  this.arg = this.arg.repeat(n);
+  return this;
+};
 
-  StringBuilder.prototype.sub = function (from, n) {
-    return this.arg = this.arg.substring(from, from+n);
-  }
+StringBuilder.prototype.divide = function (n) {
+  this.arg = this.arg.slice(0, Math.floor(this.arg.length / n));
+  return this;
+};
+StringBuilder.prototype.remove = function (str) {
+  this.arg = this.arg.split(str).join("");
+  return this;
+};
 
-  let strBuilder = new StringBuilder('Hello');
+StringBuilder.prototype.sub = function (from, n) {
+  this.arg = this.arg.substring(from, from + n);
+  return this;
+};
 
-  console.log(strBuilder.plus(' all', '!')); //'Hello all!'
-  console.log(strBuilder.minus(4)); // 'Hello '
-  console.log(strBuilder.multiply(3));  // 'Hello Hello Hello '
-  console.log(strBuilder.divide(4));  // 'Hell';
-  console.log(strBuilder.remove('l')); // 'He';
-  console.log(strBuilder.sub(1,1))     // 'e';
-  console.log(strBuilder.get());   // 'e';
+let strBuilder = new StringBuilder("Hello");
 
-  console.log(Builder.isPrototypeOf(StringBuilder)); //Why it is false ??
-  console.log(StringBuilder.prototype.constructor === Builder.prototype.constructor); //but true here??
+console.log(
+  strBuilder
+    .plus(" all", "!") //'Hello all!'
+    .minus(4) // 'Hello '
+    .multiply(3) // 'Hello Hello Hello '
+    .divide(4) // 'Hell';
+    .remove("l") // 'He';
+    .sub(1, 1) // 'e';
+    .get()
+); // 'e';
